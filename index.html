@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#FDEEF2" />
+  <meta name="color-scheme" content="light" />
+  <title>Nuestra historia</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧵</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="blobs" aria-hidden="true"><span></span><span></span><span></span></div>
+
+  <main id="app">
+    <!-- ============ INICIO ============ -->
+    <section class="view" id="inicio" data-view>
+      <div class="hero">
+        <svg class="thread-hero" viewBox="0 0 400 220" aria-hidden="true">
+          <path class="thread-path" pathLength="1"
+            d="M24 186 C 90 196, 150 200, 200 168 C 140 128, 138 58, 200 88 C 262 58, 260 128, 200 168 C 250 200, 310 196, 376 186" />
+          <circle class="knot" cx="24" cy="186" r="7" />
+          <circle class="knot" cx="376" cy="186" r="7" />
+          <text x="24" y="214" text-anchor="middle">J</text>
+          <text x="376" y="214" text-anchor="middle">Y</text>
+        </svg>
+        <p class="hero-to" id="heroTo"></p>
+        <h1 class="hero-title">Nuestra<br />historia</h1>
+        <p class="hero-days" id="heroDays"></p>
+      </div>
+
+      <figure class="polaroid">
+        <div class="slides" id="slides" aria-label="Fotos de portada, desliza para ver más"></div>
+        <figcaption>
+          <span>Tú y yo, por fin.</span>
+          <span class="dots" id="dots" aria-hidden="true"></span>
+        </figcaption>
+      </figure>
+
+      <nav class="shortcuts" aria-label="Accesos">
+        <a href="#razones" class="shortcut shortcut--rose">
+          <span class="shortcut-emoji">💌</span>
+          <span class="shortcut-title">Razones por las que te amo</span>
+          <span class="shortcut-meta" id="countReasons"></span>
+        </a>
+        <a href="#cartas" class="shortcut">
+          <span class="shortcut-emoji">✉️</span>
+          <span class="shortcut-title">Ábrelo cuando…</span>
+          <span class="shortcut-meta" id="countLetters"></span>
+        </a>
+      </nav>
+
+      <article class="verse-today">
+        <p class="verse-label">Versículo para hoy</p>
+        <blockquote id="verseToday"></blockquote>
+        <cite id="verseTodayRef"></cite>
+      </article>
+
+      <p class="signature" id="signature"></p>
+    </section>
+
+    <!-- ============ HISTORIA ============ -->
+    <section class="view" id="historia" data-view hidden>
+      <header class="view-head">
+        <h2>Cómo llegamos aquí</h2>
+        <p>Dicen que un hilo rojo invisible une a quienes están destinados a encontrarse. Se puede estirar, contraer o enredar, pero nunca romper.</p>
+      </header>
+      <div class="timeline" id="timeline">
+        <div class="timeline-thread" aria-hidden="true"><span id="threadFill"></span></div>
+      </div>
+    </section>
+
+    <!-- ============ RAZONES ============ -->
+    <section class="view" id="razones" data-view hidden>
+      <header class="view-head">
+        <h2>Razones por las que me enamoro de ti</h2>
+        <p>Desliza cada tarjeta hacia un lado para ver la siguiente.</p>
+      </header>
+      <div class="deck" id="deck" aria-live="polite"></div>
+      <div class="deck-controls">
+        <button type="button" class="round-btn" id="prevReason" aria-label="Razón anterior">
+          <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+        </button>
+        <span class="deck-count" id="deckCount"></span>
+        <button type="button" class="round-btn round-btn--rose" id="nextReason" aria-label="Siguiente razón">
+          <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
+        </button>
+      </div>
+    </section>
+
+    <!-- ============ CARTAS ============ -->
+    <section class="view" id="cartas" data-view hidden>
+      <header class="view-head">
+        <h2>Ábrelo cuando…</h2>
+        <p>Una carta para cada momento, con un versículo para acompañarte.</p>
+      </header>
+      <div class="letters" id="letters"></div>
+
+      <h3 class="subhead">Versículos para nosotros</h3>
+      <div class="verses" id="verses"></div>
+    </section>
+
+    <!-- ============ FOTOS ============ -->
+    <section class="view" id="fotos" data-view hidden>
+      <header class="view-head">
+        <h2>Nuestros momentos</h2>
+        <p>Toca cualquier foto para verla en grande.</p>
+      </header>
+      <div class="gallery" id="gallery"></div>
+    </section>
+  </main>
+
+  <!-- ============ NAVEGACIÓN ============ -->
+  <nav class="tabbar" aria-label="Secciones">
+    <a href="#inicio" data-tab>
+      <svg viewBox="0 0 24 24"><path d="M4 11l8-7 8 7v8a1 1 0 0 1-1 1h-4v-6H9v6H5a1 1 0 0 1-1-1z" /></svg>
+      <span>Inicio</span>
+    </a>
+    <a href="#historia" data-tab>
+      <svg viewBox="0 0 24 24"><path d="M5 20c3-2 3-6 7-8s4-6 7-8" /><circle cx="5" cy="20" r="1.6" /><circle cx="19" cy="4" r="1.6" /></svg>
+      <span>Historia</span>
+    </a>
+    <a href="#razones" data-tab>
+      <svg viewBox="0 0 24 24"><path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z" /></svg>
+      <span>Razones</span>
+    </a>
+    <a href="#cartas" data-tab>
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="6" width="17" height="12" rx="2" /><path d="M4 7l8 6 8-6" /></svg>
+      <span>Cartas</span>
+    </a>
+    <a href="#fotos" data-tab>
+      <svg viewBox="0 0 24 24"><rect x="3.5" y="5" width="17" height="14" rx="2" /><circle cx="9" cy="10" r="1.8" /><path d="M4 17l5-4 4 3 3-2 4 3" /></svg>
+      <span>Fotos</span>
+    </a>
+  </nav>
+
+  <!-- ============ HOJA MODAL ============ -->
+  <div class="sheet" id="sheet" hidden>
+    <div class="sheet-backdrop" data-close></div>
+    <div class="sheet-panel" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <button type="button" class="sheet-close" data-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+      </button>
+      <div id="sheetBody"></div>
+    </div>
+  </div>
+
+  <!-- ============ VISOR DE FOTOS ============ -->
+  <div class="lightbox" id="lightbox" hidden>
+    <button type="button" class="lb-btn lb-close" data-lb="close" aria-label="Cerrar">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18" /></svg>
+    </button>
+    <button type="button" class="lb-btn lb-prev" data-lb="prev" aria-label="Foto anterior">
+      <svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" /></svg>
+    </button>
+    <img id="lbImg" alt="" />
+    <button type="button" class="lb-btn lb-next" data-lb="next" aria-label="Foto siguiente">
+      <svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" /></svg>
+    </button>
+    <span class="lb-count" id="lbCount"></span>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
